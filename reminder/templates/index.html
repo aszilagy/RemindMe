@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <title>Reminder App</title>
+</head>
+
+<body onload=loadPage()>
+  <div class="dropdown">
+    <select type="text" id="dropDown" onchange="changeSelect()">
+      <option value="1">Class Assignments</option>
+      <option value="2">Birthday/Anniversary</option>
+      <option value="3">Misc</option>
+    </select>
+  </div>
+
+  <span id="reminder_class_assignments" hidden>
+    <div class='container reminder_fields' id="reminder_field_1">
+      <div class="row">
+        <div class='col'>
+          <form action="{{ url_for('send_sns')}}" method="post">
+            <p>Due Date:</p>
+            <input type="text" name="dueDate">
+
+            <p>Class:</p>
+            <input type="text" name="classId">
+
+            <p>Assignment</p>
+            <input type="text" name="assignmentType">
+
+            <div>
+              <input type="submit" class="btn btn-primary submitButton" name="Submit">
+            </div>
+          </form>
+        </div>
+
+        <div class='reminder_list col'>
+          <table>
+            <tr>
+              <th>Date Due</th>
+              <th>Class Number</th>
+              <th>Assignment</th>
+            </tr>
+            {% for reminder in daily_list %}
+            <tr>
+              <td>{{ reminder.date_time }}</td>
+              <td>{{ reminder.class_id }}</td>
+              <td>{{ reminder.assignment_type }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </span>
+
+  <span id="reminder_class_birthdays" hidden>
+    <div class='container reminder_fields' id="reminder_field_1">
+      <div class="row">
+        <div class='col'>
+          <form action="{{ url_for('send_sns')}}" method="post">
+            <p>Birthday Date:</p>
+            <input type="text" name="birthdayDate">
+
+            <p>Who:</p>
+            <input type="text" name="personName">
+
+            <p>Special Type:</p>
+            <input type="text" name="anniversaryBirthday">
+
+            <div>
+              <input type="submit" class="btn btn-primary submitButton" name="Submit">
+            </div>
+          </form>
+        </div>
+
+        <div class='reminder_list col'>
+          <table>
+            <tr>
+              <th>Birthday Date</th>
+              <th>Who</th>
+              <th>Special Type</th>
+            </tr>
+            {% for birthday in daily_list %}
+            <tr>
+              <td>{{ birthday.date_time }}</td>
+              <td>{{ birthday.class_id }}</td>
+              <td>{{ birthday.assignment_type }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </span>
+
+  <div id="change_this">
+    <p>Hello</p>
+  </div>
+
+  <script>
+    function loadPage(){
+      var e = document.getElementById("reminder_class_assignments");
+      document.getElementById("change_this").innerHTML = e.innerHTML;
+    }
+
+    function changeSelect(){
+      var e = document.getElementById("reminder_class_assignments");
+      if (document.getElementById("dropDown").value == "1"){
+        document.getElementById("change_this").innerHTML = e.innerHTML;
+        console.log("Value one")
+      }
+      else if(document.getElementById("dropDown").value == "2"){
+        document.getElementById("change_this").innerHTML = "Birthday/Anniversary";
+        console.log("Value two")
+      }
+      else if(document.getElementById("dropDown").value == "3"){
+        document.getElementById("change_this").innerHTML = "Misc";
+        console.log("Value three");
+      }
+    }
+  </script>
+</body>
+
+</html>

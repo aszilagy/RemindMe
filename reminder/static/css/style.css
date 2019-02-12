@@ -1,0 +1,45 @@
+.reminder_fields{
+  margin-top:15px;
+}
+
+.column{
+  float: left;
+  width: 50%;
+}
+
+.container.reminder_fields{
+  text-align: left;
+  border-style: solid;
+}
+
+.reminder_fields form{
+  margin:10px;
+}
+
+.reminder_fields input{
+  margin-left:10px;
+}
+
+.reminder_list{
+  margin:10px;
+}
+
+.submitButton{
+  margin:10px;
+}
+
+/* Table CSS */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
